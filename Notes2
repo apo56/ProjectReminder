@@ -1,0 +1,174 @@
+Note ProjectReminder
+__________________________________
+
+Eviter méthode static dans site web
+-----
+controller = classe
+action = methode
+view = cshtml
+-----
+Objet générique:
+public class test <T>
+
+le type générique devient un param
+-----
+astuce sympa faire list en générique
+______________________
+En C#
+int=INTEGER -> type primitif intégré à int
+
+______________________
+Classe abstraite = pas d'instanciation || uniquement héritage
+
+ne pas oublier override
+______________________
+
+Très utile!!!
+public override String ToString(){
+            String description =$"Aire =  {Air()}  \n";
+            description += "Perimetre = " + Perimetre() + Environment.NewLine;
+            return description;
+			}
+$"Aire =  {Air()}";
+______________________
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Tools
+{
+    public static class GenericListExtension
+    {
+        public  static T GetById<T>(this List<> identifiables, int id) where T : IIdentifiable
+        {
+            return identifiables.SingleOrDefault(i => i.Id == id);
+        }
+    }
+
+    internal interface IIdentifiable
+    {
+    }
+}
+__________________________________
+Ajouter sur les classes pour Entity
+https://msdn.microsoft.com/en-us/library/jj591583(v=vs.113).aspx
+-----
+[Table("InternalBlogs")]
+[KEY]
+[Column(“BlogDescription", TypeName="ntext")]
+[Required]
+[Display(Name = "test")]
+
+__________________________________
+to connect LocalDB to Visual Studio Server Explorer
+-----
+https://stackoverflow.com/questions/21563940/how-to-connect-to-localdb-in-visual-studio-server-explorer
+
+https://stackoverflow.com/questions/38767259/creating-a-connection-string-and-working-with-sql-server-localdb
+__________________________________
+TO-DO:
+1) creer interface
+public interface IIdentifiable
+   {
+       int Id { get; set; }
+   }
+-----
+public interface IRepository<T> where T : IIdentifiable
+    {
+        List<T> GetAll();
+        void Insert(T element);
+    }
+-----
+public class RepositoryFactory
+    {
+        public static IRepository<T> GetRepository<T>() where T : IIdentifiable
+        {
+            return new SerializerRepository<T>();
+        }
+    }
+-----
+public List<T> GetAll()
+        {
+            if (!fileExist){
+                return new List<T>();
+            }else{
+                return as List<T>;
+            }
+            using (var sr = new StreamReader(path))
+            {
+                 xmlSerializer.Deserialize(sr) as List<T>;
+            }
+        }
+
+        public void Insert(T element)
+        {
+            var elements = GetAll();
+            element.Id = elements.Any() ? elements.Max(e => e.Id) + 1 : 1;
+
+            elements.Add(element);
+            Save(elements);
+        }
+-----
+public class Projet : IIdentifiable
+    {    public int Id { get; set; }
+
+        public string Nom { get; set; }
+        public List<Notes> notes
+        public string description
+        public string 
+    }
+-----
+public class Bricolage : Projet
+    {    public  List<Outil> outils { get; set; }
+    }
+-----
+public class Bricolage : Projet
+    {    public  List<Outil> outils { get; set; }
+          public  List<materiel> materiaux { get; set; }
+          public  List<Outil> outils { get; set; }
+
+
+-----
+public class Outils
+    {    public  int id { get; set; }
+          public  string nom { get; set; }
+          public  bool possédé { get; set; }
+    }
+-----
+
+__________________________________
+public class RepositoryFactory
+  {
+      public static IRepository<T> GetRepository<T>() where T : IIdentifiable
+      {
+          return new SerializerRepository<T>();
+      }
+  }
+}
+------
+public interface IRepository<T> where T : IIdentifiable
+    {
+        List<T> GetAll();
+        void Insert(T element);
+        T GetById(int id);
+        void Update(T competitor);
+        void Delete(int id);
+    }
+-----
+public class CompetitorRepository : IRepository<Competitor>
+    {
+        private SqlConnection DBConnexion ;
+
+        public CompetitorRepository()
+        {
+            DBConnexion = new DBConnexion().OpenConnexion();
+        }
+
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+__________________________________

@@ -9,10 +9,10 @@ namespace BO
 
         public string Nom { get; set; }
 
-        public bool ConnaissanceAcquise{ get; set; }
+        public bool ConnaissanceAcquise { get; set; }
 
         //utile plus tard pour faire un pourcentage 
-        public  int NiveauConnaissance = new {1,2,3,4};
+        public int NiveauConnaissance { get; set; }
 
         public List<string> UrlDoc { get; set; }
         

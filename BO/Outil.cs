@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BO
 {
-    class Outil
+    public class Outil
     {
         public int Id  { get; set; }
 
