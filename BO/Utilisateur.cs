@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ProjectReminder
+namespace BO
 {
     [Table("Utilisateurs")]
     public class Utilisateur
@@ -17,11 +16,15 @@ namespace ProjectReminder
 
         public string Password { get; set; }
 
-        public virtual List<Projet> projets { get; set; }
+        //utile pour les connaissances
+        public List<string> ListLanguesConnues { get; set; } 
+
+        public virtual List<Projet> Projets { get; set; }
 
         public virtual List<Outil> MesOutils { get; set; }
 
         public virtual List<Connaissance> MesConnaissances { get; set; }
+
 
 
     }

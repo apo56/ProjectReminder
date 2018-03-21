@@ -1,9 +1,7 @@
-﻿using ProjectReminder;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-
-namespace DAL
+namespace BO.DAL
 {
     public interface IDal : IDisposable
 

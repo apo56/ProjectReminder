@@ -1,0 +1,217 @@
+//TP LINQ
+
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using tp3_linq.BO;
+
+namespace tp3_linq
+{
+    class Program
+    {
+
+
+        private static List<Auteur> ListeAuteurs = new List<Auteur>();
+        private static List<Livre> ListeLivres = new List<Livre>();
+
+        private static void InitialiserDatas()
+        {
+            ListeAuteurs.Add(new Auteur("GROUSSARD", "Thierry"));
+            ListeAuteurs.Add(new Auteur("GABILLAUD", "Jérôme"));
+            ListeAuteurs.Add(new Auteur("HUGON", "Jérôme"));
+            ListeAuteurs.Add(new Auteur("ALESSANDRI", "Olivier"));
+            ListeAuteurs.Add(new Auteur("de QUAJOUX", "Benoit"));
+            ListeLivres.Add(new Livre(1, "C# 4", "Les fondamentaux du langage", ListeAuteurs.ElementAt(0), 533));
+            ListeLivres.Add(new Livre(2, "VB.NET", "Les fondamentaux du langage", ListeAuteurs.ElementAt(0), 539));
+            ListeLivres.Add(new Livre(3, "SQL Server 2008", "SQL, Transact SQL", ListeAuteurs.ElementAt(1), 311));
+            ListeLivres.Add(new Livre(4, "ASP.NET 4.0 et C#", "Sous visual studio 2010", ListeAuteurs.ElementAt(3), 544));
+            ListeLivres.Add(new Livre(5, "C# 4", "Développez des applications windows avec visual studio 2010", ListeAuteurs.ElementAt(2), 452));
+            ListeLivres.Add(new Livre(6, "Java 7", "les fondamentaux du langage", ListeAuteurs.ElementAt(0), 416));
+            ListeLivres.Add(new Livre(7, "SQL et Algèbre relationnelle", "Notions de base", ListeAuteurs.ElementAt(1), 216));
+            ListeAuteurs.ElementAt(0).addFacture(new Facture(3500, ListeAuteurs.ElementAt(0)));
+            ListeAuteurs.ElementAt(0).addFacture(new Facture(3200, ListeAuteurs.ElementAt(0)));
+            ListeAuteurs.ElementAt(1).addFacture(new Facture(4000, ListeAuteurs.ElementAt(1)));
+            ListeAuteurs.ElementAt(2).addFacture(new Facture(4200, ListeAuteurs.ElementAt(2)));
+            ListeAuteurs.ElementAt(3).addFacture(new Facture(3700, ListeAuteurs.ElementAt(3)));
+        }
+        public static void espace(){
+            Console.WriteLine();
+            }
+
+        static void Main(string[] args)
+        {
+            InitialiserDatas();
+
+            // a retenir
+            // var tMax = appartements.Where(a => a.Pieces.Count == maxPieces);
+            // var piecesSelect = appartements.Select(a => a.Pieces);
+            // var piecesSelectmany = appartements.SelectMany(a => a.Pieces);
+            // piecesOrderer.ToList().ForEach(i => Console.WriteLine(i));
+
+            //1
+            var nomGa = ListeAuteurs.Where(i => i.Nom.StartsWith("GA"));
+            nomGa.ToList().ForEach(i => Console.WriteLine(i.Nom));
+            //CORRECTION
+            ListeAuteurs.Where(i => i.Nom.StartsWith("GA"))
+           .Select(a => a.Prenom)
+           .ToList()
+           .ForEach(Console.WriteLine);
+
+            espace();
+            //2 Compter tous les auteurs dont le nom commence par 'G'
+            var nomG = ListeAuteurs.Where(i => i.Nom.StartsWith("G"));
+            Console.WriteLine($"liste des auteurs commencant par G: {nomG.Count() }");
+            //CORRECTION
+            ListeAuteurs.Count(a => a.Nom.ToUpper().StartsWith("G"));
+
+            espace();
+            //3 Afficher les auteurs et la liste de leurs livres
+            //var listeAuteurLivres = ListeLivres.Select(l => l.Auteur);
+            //var listeAuteurLivres.ToList().ForEach(a => ListeLivres.Where(l => l.Auteur.Equals(a)));
+            //Console.WriteLine($"auteurs et la liste de leurs livres {listeAuteurLivres.ToList().ForEach(a => ListeLivres.Where(l => l.Auteur.Equals(a)))}");
+
+            //var auteurLivres = ListeLivres.Select(livres => livres.Auteur);
+            //var titreLivres = ListeLivres.Where(titre => titre.Titre==titre.);
+            //Console.WriteLine(auteurLivres.ToList().ForEach());
+            //CORRECTION V1
+            foreach (var auteur in ListeAuteurs)
+            {
+                Console.WriteLine($"{auteur.Prenom} {auteur.Nom}");
+                ListeLivres.Where(l => l.Auteur == auteur)
+                    .Select(l => l.Titre)
+                    .ToList()
+                    .ForEach(Console.WriteLine);
+            }
+            //CORRECTION V2
+            ListeLivres.GroupBy(l => l.Auteur)
+                .ToList()
+                .ForEach(livres =>
+                {
+                    Console.WriteLine($"{ livres.Key.Prenom} { livres.Key.Nom }");
+                    livres.Select(l => l.Titre)
+                    .ToList()
+                    .ForEach(Console.WriteLine);
+                });
+
+
+            espace();
+            //4 Afficher les titres de tous les livres triés par ordre alphabétique
+            //var livresOrder = ListeLivres.Select(l => l.Titre).OrderBy(x => x.);
+            var livresOrder = ListeLivres.OrderBy(l => l.Titre);
+            livresOrder.ToList().ForEach(l => Console.WriteLine(l.Titre));
+            //CORRECTION
+            ListeLivres.Select(l => l.Titre)
+                .OrderBy(t => t)
+                .ToList()
+                .ForEach(Console.WriteLine);
+
+
+
+            espace();
+            //5 Afficher le plus grand nombre de page dans un livre
+            var pageLivres = ListeLivres.Max(l => l.NbPages);
+            Console.WriteLine($"plus grand nb de pages: {pageLivres}");
+
+
+            espace();
+            //6 Afficher le livre ayant le plus grand nombre de page
+            Console.WriteLine($"titre du livre ayant le plus grand nombre de page: ");
+            var livresPages = ListeLivres.Where(l => l.NbPages.Equals(pageLivres));
+            livresPages.ToList().ForEach(i => Console.WriteLine(i.Titre));
+            //CORRECTION V1
+            Console.WriteLine($"titre du livre ayant le plus grand nombre de page: ");
+            ListeLivres.Where(l => l.NbPages.Equals(pageLivres))
+                .ToList()
+                .ForEach(i => Console.WriteLine(i.Titre));
+            //CORRECTION V2
+            ListeLivres.GroupBy(l => l.NbPages)
+                .OrderByDescending(g => g.Key)
+                .FirstOrDefault()
+                .Select(l => l.Titre)
+                .ToList()
+                .ForEach(Console.WriteLine);
+
+
+
+            espace();
+            //7 Afficher les auteurs facturés et la moyenne de leur(s) facture(s)
+            Console.WriteLine("auteurs facturés et la moyenne de leur(s) facture(s): ");
+            var auteursFacture = ListeAuteurs.Where(a => a.Factures.Count > 0);
+            auteursFacture.ToList().ForEach(i => Console.WriteLine($"auteur: {i.Prenom}  {i.Nom} et facture: {i.Factures.Average(f => f.Montant)}"));
+            //CORRECTION
+            ListeAuteurs.Where(a => a.Factures.Count > 0 && a.Factures != null)
+                .ToList()
+                .ForEach(i =>
+                Console.WriteLine($"auteur: {i.Prenom}  {i.Nom} et facture: {i.Factures.Average(f => f.Montant)}"));
+
+
+
+
+            espace();
+            //8 Afficher la liste des livres dont le nombre de page est > à la moyenne
+            Console.WriteLine("liste des livres dont le nombre de page est > à la moyenne: ");
+            var moyennePage = ListeLivres.Average(p => p.NbPages);
+            var livreSuppMoyenne = ListeLivres.Where(l=> l.NbPages> moyennePage);
+            livreSuppMoyenne.ToList().ForEach(l => Console.WriteLine(l.Titre + " "+ moyennePage));
+            //CORRECTION V1
+            Console.WriteLine("liste des livres dont le nombre de page est > à la moyenne: ");
+            var moyennePage2 = ListeLivres.Average(p => p.NbPages);
+            ListeLivres.Where(l => l.NbPages > moyennePage2)
+                .Select(l => l.Titre)
+                .ToList()
+                .ForEach(Console.WriteLine);
+            //CORRECTION V2
+            (from livre in ListeLivres
+             let average = ListeLivres.Average(l => l.NbPages)
+             where livre.NbPages > average
+             select livre.Titre).ToList().ForEach(Console.WriteLine);
+            //OU
+            var listeDesLivres = from livre in ListeLivres
+                                 let average = ListeLivres.Average(l => l.NbPages)
+                                 where livre.NbPages > average
+                                 select livre.Titre;
+            listeDesLivres.ToList().ForEach(Console.WriteLine);
+
+            espace();
+            //9 Afficher l'auteur ayant écrit le plus de livres
+            Console.WriteLine("auteur ayant écrit le plus de livres: ");
+            var livreAuteur = ListeLivres.GroupBy(l=>l.Auteur);
+            var maxAuteur = livreAuteur.OrderByDescending(l => l.Count()).FirstOrDefault();
+            Console.WriteLine( maxAuteur.Key.Nom +" "+ maxAuteur.Key.Prenom);
+            //CORRECTION
+            Console.WriteLine(ListeAuteurs
+                            .OrderByDescending(a=>ListeLivres.Count(l=>l.Auteur==a))
+                            .FirstOrDefault());
+
+
+            espace();
+            //10 l'auteur ayant écrit le moins de livres
+            Console.WriteLine("auteur ayant écrit le moins de livres: ");
+           // var livreAuteur = ListeLivres.GroupBy(l => l.Auteur);
+            var minAuteur = livreAuteur.OrderByDescending(l => l.Count()).LastOrDefault();
+            //var maxAuteur = ListeAuteurs.Select(a => a.Nom);
+            Console.WriteLine(minAuteur.Key.Nom + " " + minAuteur.Key.Prenom);
+
+            //CORRECTION
+            //11 l'auteur le plus riche
+            Console.WriteLine( ListeAuteurs
+                .OrderByDescending(a => a.Factures.Sum(f => f.Montant))
+                .FirstOrDefault().Nom);
+
+            //CORRECTION
+            //12 l'auteur ayant le meilleur prix moyen de vente sur ses livres.
+            Console.WriteLine(ListeAuteurs
+                .Where(a=>ListeLivres
+                .Count(l=>l.Auteur== a)>0)
+                .OrderByDescending(a => a.Factures
+                .Sum(f => f.Montant)/ListeLivres.Count(l=>l.Auteur==a))
+                .FirstOrDefault()
+                .Nom);
+
+
+            Console.ReadKey();
+        }
+    }
+}
