@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using BO;
+using ModelsProjets;
 
-namespace ModelsProjets
+namespace BO.M
 {
     public class Bricolage : Projets
     {

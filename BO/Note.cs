@@ -2,7 +2,7 @@
 
 namespace BO
 {
-    [Table("Notes")]
+    [Table("Note")]
     public class Note
     {
         public int Id { get; set; }

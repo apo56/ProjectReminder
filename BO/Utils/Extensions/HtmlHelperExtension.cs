@@ -7,7 +7,7 @@ namespace BO.Utils.Extensions
     public static class HtmlHelperExtension
     {
 
-        private static TagBuilder HtmlStart = new TagBuilder("<div class="form - group">");
+        private static TagBuilder HtmlStart = new TagBuilder("<div class=\"form - group\">");
         private static string HtmlMiddle = "< div class=\"col-md-10\">";
         private static string HtmlEnd = " </ div ></ div >";
 

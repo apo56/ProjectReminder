@@ -1,6 +1,6 @@
 ﻿namespace ModelsProjets
 {
-    public class Outil
+    public class Matériaux
     {
     }
 }

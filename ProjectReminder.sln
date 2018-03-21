@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectReminder.Tests", "Pr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BO", "BO\BO.csproj", "{635CB376-85EF-4168-894C-0B9BD0E2F059}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelsProjets", "Model\ModelsProjets.csproj", "{BE291022-9F52-410E-A9B1-02A7B78F6A26}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{635CB376-85EF-4168-894C-0B9BD0E2F059}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{635CB376-85EF-4168-894C-0B9BD0E2F059}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{635CB376-85EF-4168-894C-0B9BD0E2F059}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BE291022-9F52-410E-A9B1-02A7B78F6A26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BE291022-9F52-410E-A9B1-02A7B78F6A26}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BE291022-9F52-410E-A9B1-02A7B78F6A26}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BE291022-9F52-410E-A9B1-02A7B78F6A26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

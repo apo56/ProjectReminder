@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BO
 {
+    [Table("Connaissance")]
     public class Connaissance
     {
 
@@ -9,7 +11,7 @@ namespace BO
 
         public string Nom { get; set; }
 
-        public bool ConnaissanceAcquise { get; set; }
+        public bool PossedeConnaissance { get; set; }
 
         //utile plus tard pour faire un pourcentage 
         public int NiveauConnaissance { get; set; }

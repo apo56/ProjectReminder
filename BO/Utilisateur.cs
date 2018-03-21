@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BO
 {
-    [Table("Utilisateurs")]
+    [Table("Utilisateur")]
     public class Utilisateur
     {
 

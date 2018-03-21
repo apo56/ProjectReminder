@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BO
 {
-    [Table("Projets")]
+    [Table("Projet")]
     public class Projet
     {       
         public int Id { get; set; }
