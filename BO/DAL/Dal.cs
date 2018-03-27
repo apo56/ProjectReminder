@@ -30,29 +30,29 @@ namespace BO.DAL
             bdd.Dispose();
         }
         //Projet
-        public void CreerProjet(int id, string nom, TypeProjet type, string description, List<Note> notes, Utilisateur utilisateur, int cout)
-        {
-            bdd.projets.Add(new Projet(id, nom, type, description, notes, utilisateur, cout));
-            bdd.SaveChanges();
-        }
+        //public void CreerProjet(int id, string nom, TypeProjet type, string description, List<Note> notes, Utilisateur utilisateur, int cout)
+        //{
+        //    bdd.projets.Add(new Projet(id, nom, type, description, notes, utilisateur, cout));
+        //    bdd.SaveChanges();
+        //}
 
-        public void ModifierProjet(int id, string nom, TypeProjet type, string description, List<Note> notes, Utilisateur utilisateur, int cout)
+        //public void ModifierProjet(int id, string nom, TypeProjet type, string description, List<Note> notes, Utilisateur utilisateur, int cout)
 
-        {
+        //{
 
-            Projet TrouveProjet = bdd.projets.FirstOrDefault(projets => projets.Id == id);
+        //    Projet TrouveProjet = bdd.projets.FirstOrDefault(projets => projets.Id == id);
 
-            if (TrouveProjet != null)
-            {
-                TrouveProjet.Nom = nom;
-                TrouveProjet.Cout = cout;
-                TrouveProjet.Cout = cout;
-                TrouveProjet.Description = description;
+        //    if (TrouveProjet != null)
+        //    {
+        //        TrouveProjet.Nom = nom;
+        //        TrouveProjet.Cout = cout;
+        //        TrouveProjet.Cout = cout;
+        //        TrouveProjet.Description = description;
 
-                bdd.SaveChanges();
+        //        bdd.SaveChanges();
 
-            }
-        }
+        //    }
+        //}
 
         public bool ProjetExiste(int id)
         {
@@ -172,7 +172,15 @@ namespace BO.DAL
             bdd.SaveChanges();
 
         }
-        
 
+        public void CreerProjet(int id, string nom, string description, List<Note> notes, Utilisateur utilisateur, int cout)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ModifierProjet(int id, string nom, string description, List<Note> notes, Utilisateur utilisateur, int cout)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

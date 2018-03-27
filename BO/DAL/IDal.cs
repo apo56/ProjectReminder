@@ -8,9 +8,9 @@ namespace BO.DAL
     {
         //Projets
         List<Projet> ListProjets();
-        void CreerProjet(int id, string nom, TypeProjet type, string description, List<Note> notes, Utilisateur utilisateur, int cout);
+        void CreerProjet(int id, string nom,  string description, List<Note> notes, Utilisateur utilisateur, int cout);
 
-        void ModifierProjet(int id, string nom, TypeProjet type, string description, List<Note> notes, Utilisateur utilisateur, int cout);
+        void ModifierProjet(int id, string nom, string description, List<Note> notes, Utilisateur utilisateur, int cout);
 
         bool ProjetExiste(int id);
 
